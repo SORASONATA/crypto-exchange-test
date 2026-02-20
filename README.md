@@ -14,7 +14,7 @@ This project was developed as a backend assignment focusing on:
 How to run this project
 step 1 : Clone repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/SORASONATA/crypto-exchange-test.git
 cd crypto-exchange
 ````
 step 2 : Install dependencies
