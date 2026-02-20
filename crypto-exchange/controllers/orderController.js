@@ -1,13 +1,23 @@
 const db = require("../models");
 
-exports.createOrder = async (req, res) => {
-  const order = await db.Order.create(req.body);
-  res.json(order);
-};
-
 exports.getOrders = async (req, res) => {
-  const orders = await db.Order.findAll({
-    include: db.User,
-  });
-  res.json(orders);
+  try {
+    const orders = await db.Order.findAll({
+      include: [
+        {
+          model: db.User,
+          attributes: ["id", "name", "email"], 
+        },
+        {
+          model: db.Currency,
+          as: "cryptoCurrency",
+          attributes: ["currency_name"],
+        },
+      ],
+    });
+
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
